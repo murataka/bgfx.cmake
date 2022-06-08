@@ -14,3 +14,8 @@ generated/*
 !generated/*.in
 cmake_install.cmake
 .cache/
+cmake-build-debug
+build
+.idea
+CMakeLists.txt.user
+.DS_Store

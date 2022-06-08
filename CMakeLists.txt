@@ -12,7 +12,7 @@ cmake_minimum_required( VERSION 3.0 )
 project(bgfx)
 
 set_property( GLOBAL PROPERTY USE_FOLDERS ON )
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -197,3 +197,49 @@ if( BGFX_INSTALL )
 		DESTINATION "${config_install_dir}"
 	)
 endif()
+
+add_executable(toc
+		toc/toc.cpp
+		toc/toc.cpp toc/toc.hpp
+		bgfx/examples/common/entry/entry.cpp
+		bgfx/examples/common/entry/cmd.cpp
+		bgfx/examples/common/entry/entry_osx.mm
+		bgfx/examples/common/entry/input.cpp
+		bgfx/examples/common/bgfx_utils.cpp
+
+		bgfx/src/vertexlayout.cpp
+
+		#meshoptimizer
+
+		bgfx/3rdparty/meshoptimizer/src/allocator.cpp
+		bgfx/3rdparty/meshoptimizer/src/clusterizer.cpp
+		bgfx/3rdparty/meshoptimizer/src/indexcodec.cpp
+		bgfx/3rdparty/meshoptimizer/src/overdrawanalyzer.cpp
+		bgfx/3rdparty/meshoptimizer/src/indexgenerator.cpp
+		bgfx/3rdparty/meshoptimizer/src/simplifier.cpp
+		bgfx/3rdparty/meshoptimizer/src/spatialorder.cpp
+		bgfx/3rdparty/meshoptimizer/src/vcacheanalyzer.cpp
+		bgfx/3rdparty/meshoptimizer/src/vertexcodec.cpp
+
+		##
+
+		)
+
+include_directories(
+		bgfx/include
+		bx/include
+		glfw/include
+		bgfx/3rdparty
+		bgfx/examples/common
+)
+set(GLFW_SOURCE_DIR glfw)
+set(GLFW_LIB_NAME glfw)
+
+
+#include(${CMAKE_CURRENT_SOURCE_DIR}/glfw/CMakeLists.txt )
+
+target_link_libraries(toc
+		bgfx
+		bx
+		bimg
+		)
